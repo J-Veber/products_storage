@@ -1,6 +1,7 @@
 <?php
+require_once 'core/model.php';
+require_once 'core/view.php';
+require_once 'core/controller.php';
+require_once 'core/route.php';
 
-const LOGS_DIR = '../var/logs/';
-
-$container = new Container();
-//$container['db'] = include '../config/db.php';
+Route::start();
