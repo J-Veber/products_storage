@@ -5,7 +5,8 @@
 
     static function start()
     {
-      $controller_name = 'Main';
+      $model = 'Product';
+      $controller_name = 'List';
       $action_name = 'index';
 
       $routes = explode('/', $_SERVER['REQUEST_URI']);
@@ -13,8 +14,8 @@
       if (!empty($routes[1])) { $controller_name = $routes[1]; }
       if (!empty($routes[2])) { $action_name = $routes[2]; }
 
-      $model_name = 'Model_'.$controller_name;
-      $controller_name = 'Controller_'.$controller_name;
+      $model_name = $model.'_Model';
+      $controller_name = $controller_name.'_Controller';
       $action_name = 'action_'.$action_name;
 
       $model_file = strtolower($model_name).'.php';
@@ -30,6 +31,7 @@
         include $controller_path;
       } else {
         throw new Error('Controller does not exist');
+        Route::ErrorPage404();
       }
 
       $controller = new $controller_name;
@@ -39,6 +41,7 @@
         $controller->$action();
       } else {
         throw new Error('Controller does not exist');
+        Route::ErrorPage404();
       }
     }
 
