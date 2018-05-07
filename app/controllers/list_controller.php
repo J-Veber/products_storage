@@ -3,7 +3,10 @@
   class List_Controller extends Controller
   {
     function action_index() {
-      $this->view->generate('list_view.php', 'template_view.php');
+        $vars = array(
+            'test' => 'Hello'
+        );
+        $this->fenom->display("list.tpl", $vars);
     }
     public function editProduct()
     {

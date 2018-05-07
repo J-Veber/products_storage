@@ -2,6 +2,9 @@
 
   class New_Controller extends Controller {
     function action_index() {
-      $this->view->generate('new_view.php', 'template_view.php');
+        $vars = array(
+            'test' => 'Hello'
+        );
+        $this->fenom->display("new.tpl", $vars);
     }
   }
