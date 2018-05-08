@@ -1,8 +1,7 @@
 <?php
 
-class ProductModel {
+class ProductModel{
 
-    public $id;
     public $_name;
     public $_producer;
     public $_country;

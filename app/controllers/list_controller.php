@@ -3,6 +3,7 @@
   class List_Controller extends Controller
   {
     function action_index() {
+
         $vars = array(
             'test' => 'Hello'
         );
