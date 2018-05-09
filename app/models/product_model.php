@@ -12,11 +12,14 @@
     protected $producer;
     /**@Id @Column(type="string")**/
     protected $country;
-    /**@Column(type="number")**/
+    /**@Column(type="integer")**/
     protected $price;
-    /**@Column(type="date")**/
+    /**@Column(type="datetime")**/
     protected $expiration_date;
 
+    public function getId() {
+      return $this->id;
+    }
     public function setName($name)
     {
       $this->name = $name;

@@ -2,13 +2,17 @@
 
   class List_Controller extends Controller
   {
-    function action_index() {
+    function action_index()
+    {
+      $productRepository = $this->entity_manager->getRepository('Product');
+      $products = $productRepository->findAll();
 
-        $vars = array(
-            'test' => 'Hello'
-        );
-        $this->fenom->display("list.tpl", $vars);
+      foreach ($products as $product) {
+        echo sprintf("-%s\n", $product->getId() . $product->getProducer() . $product->getName() . $product->getCountry());
+      }
+      $this->fenom->display("list.tpl", $products);
     }
+
     public function editProduct()
     {
 
