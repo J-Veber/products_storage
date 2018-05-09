@@ -1,41 +1,69 @@
 <?php
+  /**
+   * @Entity @Table(name="products_storage")
+   **/
+  class Product
+  {
+    /** @Id @Column(type="integer") @GeneratedValue **/
+    protected $id;
+    /**@Id @Column(type="string")**/
+    protected $name;
+    /**@Column(type="string")**/
+    protected $producer;
+    /**@Id @Column(type="string")**/
+    protected $country;
+    /**@Column(type="number")**/
+    protected $price;
+    /**@Column(type="date")**/
+    protected $expiration_date;
 
-class ProductModel{
+    public function setName($name)
+    {
+      $this->name = $name;
+    }
 
-    public $_name;
-    public $_producer;
-    public $_country;
-    public $_price;
-    public $_expiration_date;
+    public function getName()
+    {
+      return $this->name;
+    }
 
-    public function setName($name) {
-        $this->_name = $name;
+    public function setProducer($producer)
+    {
+      $this->producer = $producer;
     }
-    public function getName() {
-        return $this->_name;
+
+    public function getProducer()
+    {
+      return $this->producer;
     }
-    public function setProducer($producer) {
-        $this->_producer = $producer;
+
+    public function setCountry($country)
+    {
+      $this->country = $country;
     }
-    public function getProducer() {
-        return $this->_producer;
+
+    public function getCountry()
+    {
+      return $this->country;
     }
-    public function setCountry($country) {
-        $this->_country = $country;
+
+    public function setPrice($price)
+    {
+      $this->price = $price;
     }
-    public function getCountry() {
-        return $this->_country;
+
+    public function getPrice()
+    {
+      return $this->price;
     }
-    public function setPrice($price) {
-        $this->_price = $price;
+
+    public function setExpirationDate($expiration_date)
+    {
+      $this->expiration_date = $expiration_date;
     }
-    public function getPrice() {
-        return $this->_price;
+
+    public function getExpirationDate()
+    {
+      return $this->expiration_date;
     }
-    public function setExpirationDate($expiration_date) {
-        $this->_expiration_date = $expiration_date;
-    }
-    public function getExpirationDate() {
-        return $this->_expiration_date;
-    }
-}
+  }

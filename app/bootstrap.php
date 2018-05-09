@@ -8,14 +8,14 @@ require_once 'core/controller.php';
 require_once 'core/route.php';
 
 $isDevMode = true;
-$config = Setup::createAnnotationMetadataConfiguration(array(__DIR__."/app/models"), $isDevMode);
+$config = Setup::createAnnotationMetadataConfiguration(array(__DIR__."\models"), $isDevMode);
 $conn = array(
   'driver'   => 'mysqli',
-  'user'     => 'user',
+  'user'     => 'root',
   'password' => 'passw',
-  'dbname'   => 'products',
+  'dbname'   => 'products_storage',
   'host'     => 'localhost',
-  'port'     => '8000',
+  'port'     => '3306',
 );
 
 $entityManager = EntityManager::create($conn, $config);

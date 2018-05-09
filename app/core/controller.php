@@ -17,7 +17,7 @@ class Controller
       'auto_reload' => true
     ));
     $this->entity_manager = $entity_manager;
-    $this->entity_manager->getRepository('Products')->findAll();
+    $this->entity_manager->getRepository('Product')->findAll();
   }
 
   public function action_index()
