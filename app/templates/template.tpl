@@ -15,5 +15,6 @@
     </div>
     {block 'page_content'}{/block}
 </div>
+<script async rel="script" src="/public/js/template.js" type="text/javascript"></script>
 </body>
 </html>

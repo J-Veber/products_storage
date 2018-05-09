@@ -32,8 +32,8 @@
                     <input type="text" class="form-control" id="expiration_date">
                 </div>
                 <div class="btn-group" role="group">
-                    <button type="submit" class="btn btn-success">Create</button>
-                    <button class="btn btn-secondary">Cancel</button>
+                    <button type="submit" class="btn btn-success" id="create">Create</button>
+                    <button onclick="window.location.href = '/list'" class="btn btn-secondary">Cancel</button>
                 </div>
             </form>
         </div>

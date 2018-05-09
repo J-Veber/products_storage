@@ -10,6 +10,7 @@
             <div class="form-group">
                 <input type="text" class="form-control" id="search" placeholder="Find products by..">
             </div>
+            <button type="button" class="btn btn-success" onclick="window.location.href='/new'">Add new product</button>
         </div>
     </div>
     <div class="row">
