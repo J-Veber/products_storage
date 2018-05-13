@@ -28,7 +28,7 @@
         </thead>
         <tbody>
         {foreach $products as $product}
-          <tr>
+          <tr ondblclick="window.location.href='/edit'">
             <th scope="row">{$product->getId()}</th>
             <td>{$product->getName()}</td>
             <td>{$product->getProducer()}</td>
