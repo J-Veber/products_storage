@@ -28,12 +28,14 @@
         </thead>
         <tbody>
         {foreach $products as $product}
-          <th scope="row">{$product->getId()}</th>
-          <td>{$product->name}</td>
-          <td>{$product->producer}</td>
-          <td>{$product->country}</td>
-          <td>{$product->price}</td>
-          <td>{$product->expiration_date}</td>
+          <tr>
+            <th scope="row">{$product->getId()}</th>
+            <td>{$product->getName()}</td>
+            <td>{$product->getProducer()}</td>
+            <td>{$product->getCountry()}</td>
+            <td>{$product->getPrice()}</td>
+            <td>{$product->getExpirationDate()}</td>
+          </tr>
         {/foreach}
         </tbody>
       </table>

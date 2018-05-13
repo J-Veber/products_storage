@@ -4,13 +4,12 @@
   {
     function action_index()
     {
-      $productRepository = $this->entity_manager->getRepository('Product');
-      $products = $productRepository->findAll();
+      $products = new Product($this->entity_manager);
 
-      foreach ($products as $product) {
-        echo sprintf("-%s\n", $product->getId() . $product->getProducer() . $product->getName() . $product->getCountry());
-      }
-      $this->fenom->display("list.tpl", $products);
+      $var = [
+        'products' => $products->getAllProducts()
+      ];
+      $this->fenom->display("list.tpl", $var);
     }
 
     public function editProduct()

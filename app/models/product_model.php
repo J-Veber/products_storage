@@ -1,22 +1,42 @@
 <?php
   /**
-   * @Entity @Table(name="products_storage")
+   * @Entity
+   * @Table(name="products_storage")
    **/
-  class Product
+  class Product extends Model
   {
-    /** @Id @Column(type="integer") @GeneratedValue **/
+    /** @Id
+     *  @Primary_key
+     *  @Column(type="integer")
+     *  @GeneratedValue(strategy="IDENTITY")
+     */
     protected $id;
-    /**@Id @Column(type="string")**/
+
+    /** @Column(type="string")**/
     protected $name;
-    /**@Column(type="string")**/
+
+    /** @Column(type="string")**/
     protected $producer;
-    /**@Id @Column(type="string")**/
+
+    /** @Column(type="string")**/
     protected $country;
-    /**@Column(type="integer")**/
+
+    /** @Column(type="integer")**/
     protected $price;
-    /**@Column(type="datetime")**/
+
+    /** @Column(type="datetime")**/
     protected $expiration_date;
 
+    public function getAllProducts(): array {
+      $productRepository = $this->entity_manager->getRepository('Product');
+      $products = $productRepository->findAll();
+      return $products;
+    }
+    /**
+     *  =====================================
+     *    GETTERS AND SETTERS METHODS
+     *  =====================================
+     */
     public function getId() {
       return $this->id;
     }
