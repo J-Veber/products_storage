@@ -7,29 +7,29 @@
   </div>
   <div class="row">
     <div class="col-12">
-      <form class="needs-validation">
+      <form class="needs-validation" method="post">
         <div class="form-row">
-          <label for="exampleInputEmail1">Product Name</label>
-          <input type="text" class="form-control" id="name" required>
+          <label for="name">Product Name</label>
+          <input type="text" class="form-control" name="name" id="name" required>
           <div class="valid-feedback">
             Looks good!
           </div>
         </div>
         <div class="form-row">
-          <label for="exampleInputPassword1">Country</label>
-          <input type="text" class="form-control" id="country">
+          <label for="country">Country</label>
+          <input type="text" class="form-control" name="country" id="country">
         </div>
         <div class="form-row">
-          <label for="exampleInputPassword1">Producer</label>
-          <input type="text" class="form-control" id="producer">
+          <label for="producer">Producer</label>
+          <input type="text" class="form-control" name="producer" id="producer">
         </div>
         <div class="form-row">
-          <label for="exampleInputPassword1">Price</label>
-          <input type="text" class="form-control" id="price" required>
+          <label for="price">Price</label>
+          <input type="text" class="form-control" name="price" id="price" required>
         </div>
         <div class="form-row">
-          <label for="exampleInputPassword1">Expiration Date</label>
-          <input type="text" class="form-control" id="expiration_date">
+          <label for="expiration_date">Expiration Date</label>
+          <input type="text" class="form-control" name="expiration_date" id="expiration_date">
         </div>
         <div class="btn-group" role="group">
           <button type="submit" class="btn btn-success" id="create">Create</button>

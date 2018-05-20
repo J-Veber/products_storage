@@ -27,10 +27,27 @@
     /** @Column(type="datetime")**/
     protected $expiration_date;
 
+    private $productRepository;
+
+    public function __construct($entity_manager)
+    {
+      parent::__construct($entity_manager);
+      $this->productRepository = $this->entity_manager->getRepository('Product');
+    }
+
     public function getAllProducts(): array {
-      $productRepository = $this->entity_manager->getRepository('Product');
-      $products = $productRepository->findAll();
+      $products = $this->productRepository->findAll();
       return $products;
+    }
+
+    public function createProduct($newProduct) {
+      if ($newProduct instanceof Product){
+        echo 'try to save the product with name ' . $newProduct->name;
+        $this->entity_manager->persist($newProduct);
+        $this->entity_manager->flush();
+      } else {
+        throw new Error('invalid input parameters');
+      }
     }
     /**
      *  =====================================
