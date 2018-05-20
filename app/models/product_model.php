@@ -49,6 +49,13 @@
         throw new Error('invalid input parameters');
       }
     }
+
+    public function deleteProduct($id) {
+      $product = $this->productRepository->find($id);
+      echo 'try to remove product ' . $product->getName();
+      $this->entity_manager->remove($product);
+      $this->entity_manager->flush();
+    }
     /**
      *  =====================================
      *    GETTERS AND SETTERS METHODS

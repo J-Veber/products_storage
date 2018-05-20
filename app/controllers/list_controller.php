@@ -12,12 +12,13 @@
       $this->fenom->display("list.tpl", $var);
     }
 
-    public function editProduct()
+    public function action_delete($request)
     {
-
+      $product = new Product($this->entity_manager);
+      $product->deleteProduct($request['id']);
     }
 
-    public function deleteProduct()
+    public function editProduct()
     {
 
     }

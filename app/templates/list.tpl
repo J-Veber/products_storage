@@ -24,6 +24,7 @@
           <th scope="col">Country</th>
           <th scope="col">Price</th>
           <th scope="col">Expiration Date</th>
+          <th scope="col"></th>
         </tr>
         </thead>
         <tbody>
@@ -35,6 +36,7 @@
             <td>{$product->getCountry()}</td>
             <td>{$product->getPrice()}</td>
             <td>{$product->getExpirationDate()}</td>
+            <td><button id = '{$product->getId()}' onclick="deleteProduct(event)">Delete</button></td>
           </tr>
         {/foreach}
         </tbody>
