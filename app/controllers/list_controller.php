@@ -15,7 +15,9 @@
     public function action_delete()
     {
       echo 'delete action';
+      echo $_POST['id'];
       echo $_REQUEST['id'];
+      echo $_GET['id'];
 //      $product = new Product($this->entity_manager);
 //      $product->deleteProduct($_POST['id']);
     }
