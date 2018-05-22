@@ -2,20 +2,20 @@
 
   class Edit_Controller extends Controller
   {
+    public $var = [];
+
     function action_index()
     {
-      if (isset($_POST['name']) && isset($_POST['price'])) {
-
-        $vars = [
-          'name' => $_POST['name'],
-          'producer' => $_POST['producer'],
-          'price' => (int)$_POST['price'],
-          'country' => $_POST['country']
+      $data = json_decode(file_get_contents('php://input'), true);
+      var_dump($data);
+      var_dump($_POST);
+      if (!!$data['id']) {
+        $product = new Product($this->entity_manager);
+        $this->var = [
+          'products' => $product->getProductById($data['id'])
         ];
-
-        $this->fenom->display("edit.tpl", $vars);
-      }
-      else {
+        $this->fenom->display("edit.tpl", $this->var);
+      } else {
         $this->fenom->display('error.tpl', []);
       }
     }
