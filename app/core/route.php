@@ -17,7 +17,11 @@ class Route
     $routes = explode('/', $_SERVER['REQUEST_URI']);
 
     if (!empty($routes[1])) {
-      $controller_name = $routes[1];
+      if (!strpos($routes[1], '?') ) {
+        $controller_name = $routes[1];
+      } else {
+        $controller_name = substr($routes[1], 0, strpos($routes[1], '?'));
+      }
     }
     if (!empty($routes[2])) {
       $action_name = $routes[2];
