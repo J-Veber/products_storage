@@ -8,10 +8,10 @@
     <link rel="stylesheet" href="/public/css/template.css">
 </head>
 <body class="bg-light">
-<div class="container">
+<div class="container-fluid">
     <div class="row">
         <div class="col-12">
-            <h1 class="h1 text-dark">Products</h1>
+            <h1 class="h1 text-dark text-center">Products</h1>
         </div>
     </div>
     {block 'page_content'}{/block}

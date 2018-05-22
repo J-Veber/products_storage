@@ -1,16 +1,22 @@
 {extends 'template.tpl'}
 {block 'page_content'}
   <div class="row">
-    <div class="col-12">
+    <div class="col-12 text-center">
       <h2 class="h2">List</h2>
     </div>
   </div>
   <div class="row">
-    <div class="col-12">
+    <div class="col-md-10 col-sm-12">
       <div class="form-group">
-        <input type="text" class="form-control" id="search" placeholder="Find products by..">
+        <input
+            onkeydown="filter_products($event)"
+            type="text" class="form-control" id="search" placeholder="Find products by..">
       </div>
-      <button type="button" class="btn btn-success" onclick="window.location.href='/new'">Add new product</button>
+    </div>
+    <div class="col-md-2 col-sm-12">
+      <button type="button" class="btn btn-success w-100 mb-3" onclick="window.location.href='/new'">
+        Add new
+      </button>
     </div>
   </div>
   <div class="row">
@@ -29,14 +35,19 @@
         </thead>
         <tbody>
         {foreach $products as $product}
-          <tr ondblclick="window.location.href='/edit'">
+          <tr ondblclick="window.location.href='/edit'" id="product_{$product->getId()}">
             <th scope="row">{$product->getId()}</th>
             <td>{$product->getName()}</td>
             <td>{$product->getProducer()}</td>
             <td>{$product->getCountry()}</td>
             <td>{$product->getPrice()}</td>
             <td>{$product->getExpirationDate()}</td>
-            <td><button id = '{$product->getId()}' onclick="deleteProduct(event)">Delete</button></td>
+            <td>
+              <button id='{$product->getId()}' onclick="deleteProduct(event)"
+                      type="button" class="btn btn-outline-danger w-100">
+                -
+              </button>
+            </td>
           </tr>
         {/foreach}
         </tbody>
