@@ -42,7 +42,6 @@
 
     public function createProduct($newProduct) {
       if ($newProduct instanceof Product){
-        echo 'try to save the product with name ' . $newProduct->name;
         $this->entity_manager->persist($newProduct);
         $this->entity_manager->flush();
       } else {
