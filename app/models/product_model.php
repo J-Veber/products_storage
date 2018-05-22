@@ -1,42 +1,123 @@
 <?php
+  /**
+   * @Entity
+   * @Table(name="products_storage")
+   **/
+  class Product extends Model
+  {
+    /** @Id
+     *  @Primary_key
+     *  @Column(type="integer")
+     *  @GeneratedValue(strategy="IDENTITY")
+     */
+    protected $id;
 
-class ProductModel {
+    /** @Column(type="string")**/
+    protected $name;
 
-    public $id;
-    public $_name;
-    public $_producer;
-    public $_country;
-    public $_price;
-    public $_expiration_date;
+    /** @Column(type="string")**/
+    protected $producer;
 
-    public function setName($name) {
-        $this->_name = $name;
+    /** @Column(type="string")**/
+    protected $country;
+
+    /** @Column(type="integer")**/
+    protected $price;
+
+    /** @Column(type="datetime")**/
+    protected $expiration_date;
+
+    private $productRepository;
+
+    public function __construct($entity_manager)
+    {
+      parent::__construct($entity_manager);
+      $this->productRepository = $this->entity_manager->getRepository('Product');
     }
-    public function getName() {
-        return $this->_name;
+
+    public function getAllProducts(): array {
+      $products = $this->productRepository->findAll();
+      return $products;
     }
-    public function setProducer($producer) {
-        $this->_producer = $producer;
+
+    public function getProductById($product_id): Product {
+      if (is_string($product_id)) {
+        return $this->productRepository->findBy(array('id' => $product_id));
+      } else {
+        throw new Error( 'invalid input parameter $product_id in getProductById()');
+      }
     }
-    public function getProducer() {
-        return $this->_producer;
+
+    public function createProduct($newProduct) {
+      if ($newProduct instanceof Product){
+        $this->entity_manager->persist($newProduct);
+        $this->entity_manager->flush();
+      } else {
+        throw new Error('invalid input parameters');
+      }
     }
-    public function setCountry($country) {
-        $this->_country = $country;
+
+    public function deleteProduct($id) {
+      $product = $this->productRepository->find($id);
+      echo 'try to remove product ' . $product->getName();
+      $this->entity_manager->remove($product);
+      $this->entity_manager->flush();
     }
-    public function getCountry() {
-        return $this->_country;
+    /**
+     *  =====================================
+     *    GETTERS AND SETTERS METHODS
+     *  =====================================
+     */
+    public function getId() {
+      return $this->id;
     }
-    public function setPrice($price) {
-        $this->_price = $price;
+    public function setName($name)
+    {
+      $this->name = $name;
     }
-    public function getPrice() {
-        return $this->_price;
+
+    public function getName()
+    {
+      return $this->name;
     }
-    public function setExpirationDate($expiration_date) {
-        $this->_expiration_date = $expiration_date;
+
+    public function setProducer($producer)
+    {
+      $this->producer = $producer;
     }
-    public function getExpirationDate() {
-        return $this->_expiration_date;
+
+    public function getProducer()
+    {
+      return $this->producer;
     }
-}
+
+    public function setCountry($country)
+    {
+      $this->country = $country;
+    }
+
+    public function getCountry()
+    {
+      return $this->country;
+    }
+
+    public function setPrice($price)
+    {
+      $this->price = $price;
+    }
+
+    public function getPrice()
+    {
+      return $this->price;
+    }
+
+    public function setExpirationDate($expiration_date)
+    {
+      $this->expiration_date = $expiration_date;
+    }
+
+    public function getExpirationDate()
+    {
+      return $this->expiration_date;
+    }
+  }

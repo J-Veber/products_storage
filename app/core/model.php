@@ -1,7 +1,12 @@
 <?php
 
   class Model {
-    public function get_data() {
 
+    protected $entity_manager;
+
+    public function __construct($entity_manager)
+    {
+      $this->entity_manager = $entity_manager;
     }
+
   }
