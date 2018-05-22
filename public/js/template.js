@@ -29,12 +29,9 @@ function filter_products(event) {
  * @param product_id
  */
 function remove(product_id) {
-  // console.log('deleteProduct', product_id);
+  console.log('deleteProduct', product_id);
   // console.log('deleteProduct', document.getElementById('product_'+product_id));
-  if (product_id instanceof String) {
-    document.getElementById('product_' + product_id).remove();
-  }
-  throw new Error('invalid parameter in function remove');
+  document.getElementById('product_' + product_id).remove();
 }
 
 /**
@@ -43,18 +40,6 @@ function remove(product_id) {
  */
 function editProduct(product_id) {
   window.location.href = '/edit?product_id='+product_id;
-  // console.log('editProduct', product_id);
-  // const xhr = new XMLHttpRequest();
-  // xhr.open("GET", '/edit?product_id='+product_id, false);
-  // xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
-  // // const data = {id: product_id};
-  // // const json = JSON.stringify(data);
-  // xhr.send();
-  // // location.href = '/edit';
-  // xhr.onload = function () {
-  //   if (xhr.status === 200) {
-  //   }
-  // };
 }
 
 window.onload = () => {

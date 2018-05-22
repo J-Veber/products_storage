@@ -57,6 +57,15 @@
       }
     }
 
+    public function updateProduct($product) {
+      if ($product instanceof Product){
+        $this->entity_manager->merge($product);
+        $this->entity_manager->flush();
+      } else {
+        throw new Error('invalid input parameters');
+      }
+    }
+
     public function deleteProduct($id) {
       $product = $this->productRepository->find($id);
       echo 'try to remove product ' . $product->getName();
@@ -68,9 +77,15 @@
      *    GETTERS AND SETTERS METHODS
      *  =====================================
      */
+    public function setId($id)
+    {
+      $this->id = $id;
+    }
+
     public function getId() {
       return $this->id;
     }
+
     public function setName($name)
     {
       $this->name = $name;
