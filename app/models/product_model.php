@@ -40,6 +40,14 @@
       return $products;
     }
 
+    public function getProductById($product_id): Product {
+      if (is_string($product_id)) {
+        return $this->productRepository->findBy(array('id' => $product_id));
+      } else {
+        throw new Error( 'invalid input parameter $product_id in getProductById()');
+      }
+    }
+
     public function createProduct($newProduct) {
       if ($newProduct instanceof Product){
         $this->entity_manager->persist($newProduct);
