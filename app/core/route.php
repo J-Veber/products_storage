@@ -48,7 +48,7 @@ class Route
     if (method_exists($controller, $action)) {
       $controller->$action();
     } else {
-      throw new Error('Controller does not exist');
+      $this->ErrorPage404();
     }
   }
 
