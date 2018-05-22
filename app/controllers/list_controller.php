@@ -2,24 +2,22 @@
 
   class List_Controller extends Controller
   {
+    public $var = [];
     function action_index()
     {
-      $products = new Product($this->entity_manager);
-
-      $var = [
-        'products' => $products->getAllProducts()
-      ];
-      $this->fenom->display("list.tpl", $var);
+      $product = new Product($this->entity_manager);
+      $this->displayAllProducts($product);
     }
 
     public function action_delete()
     {
-      echo 'delete action';
-      echo $_POST['id'];
-      echo $_REQUEST['id'];
-      echo $_GET['id'];
-//      $product = new Product($this->entity_manager);
-//      $product->deleteProduct($_POST['id']);
+      $data = json_decode(file_get_contents('php://input'), true);
+      var_dump($data['id']);
+      $product = new Product($this->entity_manager);
+      $product->deleteProduct($data['id']);
+      $this->var = [
+        'products' => $product->getAllProducts()
+      ];
     }
 
     public function editProduct()
@@ -35,5 +33,12 @@
     public function createProduct()
     {
 
+    }
+
+    private function displayAllProducts($product) {
+      $this->var = [
+        'products' => $product->getAllProducts()
+      ];
+      $this->fenom->display("list.tpl", $this->var);
     }
   }
