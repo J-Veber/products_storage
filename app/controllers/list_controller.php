@@ -12,7 +12,6 @@
     public function action_delete()
     {
       $data = json_decode(file_get_contents('php://input'), true);
-      var_dump($data['id']);
       $product = new Product($this->entity_manager);
       $product->deleteProduct($data['id']);
       $this->var = [
