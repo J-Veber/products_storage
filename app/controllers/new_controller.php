@@ -4,6 +4,13 @@
   {
     function action_index()
     {
+      $vars = array(
+        'test' => 'Hello'
+      );
+      $this->fenom->display("new.tpl", $vars);
+    }
+
+    function action_save() {
       if (isset( $_POST['name']) && isset( $_POST['price'])) {
         $product = new Product($this->entity_manager);
         $product->setName($_POST['name']);
@@ -13,10 +20,7 @@
         $product->setExpirationDate(null);
 
         $product->createProduct($product);
+        header('Location: /list');
       }
-      $vars = array(
-        'test' => 'Hello'
-      );
-      $this->fenom->display("new.tpl", $vars);
     }
   }
