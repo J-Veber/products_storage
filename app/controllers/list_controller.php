@@ -19,21 +19,6 @@
       ];
     }
 
-    public function editProduct()
-    {
-
-    }
-
-    public function getProduct()
-    {
-
-    }
-
-    public function createProduct()
-    {
-
-    }
-
     private function displayAllProducts($product) {
       $this->var = [
         'products' => $product->getAllProducts()
