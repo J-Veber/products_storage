@@ -10,22 +10,22 @@
       <form class="needs-validation" method="post">
         <div class="form-row">
           <label for="name">Product Name</label>
-          <input type="text" class="form-control" name="name" id="name" required value="{$name}">
+          <input type="text" class="form-control" name="name" id="name" required value="{$product->getName()}">
           <div class="valid-feedback">
             Looks good!
           </div>
         </div>
         <div class="form-row">
           <label for="country">Country</label>
-          <input type="text" class="form-control" name="country" id="country" value="{$country}">
+          <input type="text" class="form-control" name="country" id="country" value="{$product->getProducer()}">
         </div>
         <div class="form-row">
           <label for="producer">Producer</label>
-          <input type="text" class="form-control" name="producer" id="producer" value="{$producer}">
+          <input type="text" class="form-control" name="producer" id="producer" value="{$product->getCountry()}">
         </div>
         <div class="form-row">
           <label for="price">Price</label>
-          <input type="text" class="form-control" name="price" id="price" required value="{$price}">
+          <input type="text" class="form-control" name="price" id="price" required value="{$product->getPrice()}">
         </div>
         <div class="form-row">
           <label for="expiration_date">Expiration Date</label>

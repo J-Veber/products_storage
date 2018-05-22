@@ -6,14 +6,22 @@
 
     function action_index()
     {
-      $data = json_decode(file_get_contents('php://input'), true);
-      var_dump($data);
-      var_dump($_POST);
-      if (!!$data['id']) {
+      if (!!$_GET['product_id']) {
         $product = new Product($this->entity_manager);
-        $this->var = [
-          'products' => $product->getProductById($data['id'])
-        ];
+        $productResponse = $product->getProductById($_GET['product_id']);
+        $product->setName($productResponse[0]->getName());
+        $product->setProducer($productResponse[0]->getProducer());
+        $product->setPrice($productResponse[0]->getPrice());
+        $product->setCountry($productResponse[0]->getCountry());
+        $product->setExpirationDate($productResponse[0]->getExpirationDate());
+
+        if (count($productResponse) > 1) {
+          throw new Error('DB has ' + count($productResponse) + ' record with same id');
+        } else {
+          $this->var = [
+            'product' => $product
+          ];
+        }
         $this->fenom->display("edit.tpl", $this->var);
       } else {
         $this->fenom->display('error.tpl', []);

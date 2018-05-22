@@ -40,7 +40,7 @@
       return $products;
     }
 
-    public function getProductById($product_id): Product {
+    public function getProductById($product_id): array {
       if (is_string($product_id)) {
         return $this->productRepository->findBy(array('id' => $product_id));
       } else {
