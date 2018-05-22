@@ -1,3 +1,26 @@
+window.onload = () => {
+  let products = [];
+  const rows = document.getElementsByTagName('tr');
+  Object.keys(rows)
+    .forEach( key => {
+      rows[key].addEventListener('dblclick', () => {
+        const product_id = rows[key].id.replace('product_', '');
+        editProduct(product_id);
+      });
+    });
+  const xhr = new XMLHttpRequest();
+  xhr.open("GET", '/list/all', true);
+  xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+  xhr.send();
+  xhr.onload = function () {
+    if (xhr.status === 200) {
+      products = JSON.parse(xhr.response);
+      console.log(products);
+    }
+  };
+};
+
+
 /**
  * @description send delete request and remove row from table
  * @param event - clicked button
@@ -41,14 +64,3 @@ function remove(product_id) {
 function editProduct(product_id) {
   window.location.href = '/edit?product_id='+product_id;
 }
-
-window.onload = () => {
-  const rows = document.getElementsByTagName('tr');
-  Object.keys(rows)
-    .forEach( key => {
-    rows[key].addEventListener('dblclick', () => {
-      const product_id = rows[key].id.replace('product_', '');
-      editProduct(product_id);
-    });
-  });
-};
