@@ -46,15 +46,19 @@ function deleteProduct(event) {
 function filter_products(event) {
   let filteredProducts = products;
   const filterString = event.target.value;
-  if (filterString.length > 0) {
+  if (filterString.length >= 0) {
     const filterWords = filterString.split(' ');
     for (let i = 0; i<filteredProducts.length; i++) {
       let isFinded = true;
       for (let q = 0; q < filterWords.length && isFinded; q++) {
         isFinded = !compare(products[i], filterWords[q]) && isFinded;
       }
-      // TODO: !!isFinded -> оставить строку, иначе сделать display: none
-      console.log('filter_products', isFinded);
+      const row = document.getElementById('product_' + products[i].id);
+      if (!isFinded) {
+        row.classList.add('d-none');
+      } else {
+        row.classList.remove('d-none');
+      }
     }
   }
 }

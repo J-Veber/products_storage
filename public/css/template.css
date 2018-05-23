@@ -5,6 +5,9 @@ body {
 .d-none {
   display: none;
 }
+.d-table-row {
+  display: table-row;
+}
 
 .btn {
   display: flex!important;
