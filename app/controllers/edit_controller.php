@@ -34,13 +34,13 @@
     function action_save() {
       if (isset( $_POST['name']) && isset( $_POST['price'])) {
         $product = new Product($this->entity_manager);
-        $product->setId($this->productId);
-        $product->setName($_POST['name']);
-        $product->setProducer($_POST['producer']);
-        $product->setPrice((int)$_POST['price']);
-        $product->setCountry($_POST['country']);
-        $product->setExpirationDate(null);
-        $product->updateProduct($product);
+        $receivedProduct = $product->getProductById($_POST['id'])[0];
+        $receivedProduct->setName($_POST['name']);
+        $receivedProduct->setProducer($_POST['producer']);
+        $receivedProduct->setPrice((int)$_POST['price']);
+        $receivedProduct->setCountry($_POST['country']);
+        $receivedProduct->setExpirationDate(null);
+        $product->updateProduct($receivedProduct);
         header('Location: /list');
       }
     }

@@ -5,3 +5,12 @@ body {
 .d-none {
   display: none;
 }
+
+.btn {
+  display: flex!important;
+  flex-grow: 1!important;
+}
+
+.btn > span {
+  margin: auto!important;
+}

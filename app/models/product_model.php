@@ -59,7 +59,6 @@
 
     public function updateProduct($product) {
       if ($product instanceof Product){
-        $this->entity_manager->merge($product);
         $this->entity_manager->flush();
       } else {
         throw new Error('invalid input parameters');

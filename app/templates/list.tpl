@@ -15,7 +15,7 @@
     </div>
     <div class="col-md-2 col-sm-12">
       <button type="button" class="btn btn-success w-100 mb-3" onclick="window.location.href='/new'">
-        Add new
+        <span>Add new</span>
       </button>
     </div>
   </div>
@@ -45,7 +45,7 @@
             <td>
               <button id='{$product->getId()}' onclick="deleteProduct(event)"
                       type="button" class="btn btn-outline-danger w-100">
-                -
+                <span>-</span>
               </button>
             </td>
           </tr>
