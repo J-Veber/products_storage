@@ -7,7 +7,7 @@
   </div>
   <div class="row">
     <div class="col-12">
-      <form class="needs-validation" method="post" >
+      <form class="needs-validation" method="post" action="/edit/save">
         <div class="form-row">
           <label for="name">Product ID</label>
           <input type="text" class="form-control" name="id" id="id" required value="{$product->getId()}" disabled>
