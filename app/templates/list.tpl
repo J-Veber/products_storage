@@ -9,7 +9,7 @@
     <div class="col-md-10 col-sm-12">
       <div class="form-group">
         <input
-            onkeydown="filter_products($event)"
+            onkeyup="filter_products(event)"
             type="text" class="form-control" id="search" placeholder="Find products by..">
       </div>
     </div>

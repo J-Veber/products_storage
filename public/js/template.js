@@ -1,5 +1,6 @@
+let products = [];
+
 window.onload = () => {
-  let products = [];
   const rows = document.getElementsByTagName('tr');
   Object.keys(rows)
     .forEach( key => {
@@ -15,7 +16,6 @@ window.onload = () => {
   xhr.onload = function () {
     if (xhr.status === 200) {
       products = JSON.parse(xhr.response);
-      console.log(products);
     }
   };
 };
@@ -44,7 +44,34 @@ function deleteProduct(event) {
  * @param event
  */
 function filter_products(event) {
+  let filteredProducts = products;
+  const filterString = event.target.value;
+  if (filterString.length > 0) {
+    const filterWords = filterString.split(' ');
+    for (let i = 0; i<filteredProducts.length; i++) {
+      let isFinded = true;
+      for (let q = 0; q < filterWords.length && isFinded; q++) {
+        isFinded = !compare(products[i], filterWords[q]) && isFinded;
+      }
+      // TODO: !!isFinded -> оставить строку, иначе сделать display: none
+      console.log('filter_products', isFinded);
+    }
+  }
+}
 
+/**
+ * @description search word in Product Object
+ * @param product
+ * @param word
+ */
+function compare(product, word){
+  let result = false;
+  Object.keys(product).forEach( key => {
+    if (!result && product[key]) {
+      result = product[key].toString().indexOf(word) !== -1 || result;
+    }
+  });
+  return !result;
 }
 
 /**
@@ -52,8 +79,6 @@ function filter_products(event) {
  * @param product_id
  */
 function remove(product_id) {
-  console.log('deleteProduct', product_id);
-  // console.log('deleteProduct', document.getElementById('product_'+product_id));
   document.getElementById('product_' + product_id).remove();
 }
 

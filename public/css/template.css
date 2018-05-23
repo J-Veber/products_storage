@@ -1,3 +1,7 @@
 body {
   font-family: 'Tajawal', sans-serif;
 }
+
+.d-none {
+  display: none;
+}
