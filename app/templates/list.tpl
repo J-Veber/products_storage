@@ -6,17 +6,16 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-md-10 col-sm-12">
-      <div class="form-group">
-        <input
-            onkeyup="filter_products(event)"
-            type="text" class="form-control" id="search" placeholder="Find products by..">
+    <div class="col-12">
+      <div class="d-flex">
+        <div class="form-group">
+          <input onkeyup="filter_products(event)"
+                 type="text" class="form-control" id="search" placeholder="Find products by..">
+        </div>
+        <clr-icon shape="plus" size="32" class="is-success mx-2"
+                  alt="Add new product" onclick="window.location.href='/new'"></clr-icon>
       </div>
-    </div>
-    <div class="col-md-2 col-sm-12">
-      <button type="button" class="btn btn-success w-100 mb-3" onclick="window.location.href='/new'">
-        <span>Add new</span>
-      </button>
+
     </div>
   </div>
   <div class="row">
@@ -30,7 +29,7 @@
           <th scope="col">Country</th>
           <th scope="col">Price</th>
           <th scope="col">Expiration Date</th>
-          <th scope="col"></th>
+          <th scope="col">Actions</th>
         </tr>
         </thead>
         <tbody>
@@ -47,10 +46,13 @@
             <td>{$product->getExpirationDate()->format('d/m/Y')}</td>
             {/if}
             <td>
-              <button id='{$product->getId()}' onclick="deleteProduct(event)"
-                      type="button" class="btn btn-outline-danger w-100">
-                <span>-</span>
-              </button>
+              <clr-icon id='edit_{$product->getId()}' shape="pencil" size="22" class="is-highlight"
+                        alt="Edit product" onclick="editProduct({$product->getId()})"></clr-icon>
+              <clr-icon id='show_{$product->getId()}' shape="help-info" size="22" class="is-warning"
+                        alt="Show product info" onclick="showProduct({$product->getId()})"></clr-icon>
+              <clr-icon id='{$product->getId()}' onclick="deleteProduct(event)"
+                        shape="trash" size="22" class="is-error"
+                        alt="Delete product"></clr-icon>
             </td>
           </tr>
         {/foreach}

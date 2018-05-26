@@ -17,3 +17,19 @@ body {
 .btn > span {
   margin: auto!important;
 }
+
+.row .form-group {
+  flex: 1 1 auto;
+}
+
+.row clr-icon {
+  flex: 0 0 auto;
+}
+
+clr-icon {
+  align-self: center;
+}
+
+clr-icon:hover {
+  cursor: pointer;
+}

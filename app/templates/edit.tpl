@@ -21,11 +21,11 @@
         </div>
         <div class="form-group">
           <label for="country">Country</label>
-          <input type="text" class="form-control" name="country" id="country" value="{$product->getProducer()}">
+          <input type="text" class="form-control" name="country" id="country" value="{$product->getCountry()}">
         </div>
         <div class="form-group">
           <label for="producer">Producer</label>
-          <input type="text" class="form-control" name="producer" id="producer" value="{$product->getCountry()}">
+          <input type="text" class="form-control" name="producer" id="producer" value="{$product->getProducer()}">
         </div>
         <div class="form-group">
           <label for="price">Price</label>

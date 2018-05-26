@@ -1,14 +1,6 @@
 let products = [];
 
 window.onload = () => {
-  const rows = document.getElementsByTagName('tr');
-  Object.keys(rows)
-    .forEach( key => {
-      rows[key].addEventListener('dblclick', () => {
-        const product_id = rows[key].id.replace('product_', '');
-        editProduct(product_id);
-      });
-    });
   const xhr = new XMLHttpRequest();
   xhr.open("GET", '/list/all', true);
   xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
@@ -102,4 +94,12 @@ function remove(product_id) {
  */
 function editProduct(product_id) {
   window.location.href = '/edit?product_id='+product_id;
+}
+
+/**
+ * @description open /show for current product
+ * @param product_id
+ */
+function showProduct(product_id) {
+  window.location.href = '/show?product_id='+product_id;
 }

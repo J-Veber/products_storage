@@ -20,7 +20,7 @@
     {
       $data = json_decode(file_get_contents('php://input'), true);
       $this->product = new Product($this->entity_manager);
-      $this->product->deleteProduct($data['id']);
+      $this->product->deleteProduct((int)$data['id']);
     }
 
     public function action_all() {
