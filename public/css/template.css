@@ -33,3 +33,12 @@ clr-icon {
 clr-icon:hover {
   cursor: pointer;
 }
+
+.feedback {
+  position: absolute;
+  display: none;
+  width: 100%;
+  margin-top: 0;
+  font-size: 80%;
+  padding-left: 1rem;
+}

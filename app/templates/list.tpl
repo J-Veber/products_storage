@@ -61,3 +61,6 @@
     </div>
   </div>
 {/block}
+{block 'scripts'}
+  <script async rel="script" src="/public/js/list.js" type="text/javascript"></script>
+{/block}

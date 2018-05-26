@@ -15,32 +15,44 @@
         <div class="form-group">
           <label for="name">Product Name</label>
           <input type="text" class="form-control" name="name" id="name" value="{$product->getName()}">
-          <div class="valid-feedback">
-            Looks good!
-          </div>
+          <div class="feedback"></div>
         </div>
         <div class="form-group">
           <label for="country">Country</label>
           <input type="text" class="form-control" name="country" id="country" value="{$product->getCountry()}">
+          <div class="feedback"></div>
         </div>
         <div class="form-group">
           <label for="producer">Producer</label>
           <input type="text" class="form-control" name="producer" id="producer" value="{$product->getProducer()}">
+          <div class="feedback"></div>
         </div>
         <div class="form-group">
           <label for="price">Price</label>
           <input type="text" class="form-control" name="price" id="price" value="{$product->getPrice()}">
+          <div class="feedback"></div>
         </div>
         <div class="form-group">
           <label for="expiration_date">Expiration Date</label>
           <input type="text" class="form-control datepicker" name="expiration_date" id="expiration_date" data-provide="datepicker"
                  value="{$product->getExpirationDate()->format('d/m/Y')}">
+          <div class="feedback"></div>
         </div>
         <div class="btn-group w-100" role="group">
-          <button type="submit" class="btn btn-success" id="create"><span>Update</span></button>
+          <button type="submit" class="btn btn-success" id="submit"><span>Update</span></button>
           <button onclick="window.location.href = '/list'" class="btn btn-secondary"><span>Cancel</span></button>
         </div>
       </form>
     </div>
   </div>
+{/block}
+{block 'scripts'}
+  <script type="text/javascript" src="/node_modules/jquery/dist/jquery.min.js"></script>
+  <script type="text/javascript"
+          src="/node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+  <link rel="stylesheet"
+        href="/node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css"/>
+  <link rel="stylesheet" href="/public/css/template.css">
+  <script async rel="script" src="/public/js/validation.js" type="text/javascript"></script>
+  <script async rel="script" src="/public/js/datepicker.js" type="text/javascript"></script>
 {/block}
