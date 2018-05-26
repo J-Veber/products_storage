@@ -12,7 +12,7 @@
           <input onkeyup="filter_products(event)"
                  type="text" class="form-control" id="search" placeholder="Find products by..">
         </div>
-        <clr-icon shape="plus" size="32" class="is-success mx-2"
+        <clr-icon shape="plus" size="32" class="is-success mx-2 mb-3"
                   alt="Add new product" onclick="window.location.href='/new'"></clr-icon>
       </div>
 
