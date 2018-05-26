@@ -41,7 +41,11 @@
             <td>{$product->getProducer()}</td>
             <td>{$product->getCountry()}</td>
             <td>{$product->getPrice()}</td>
-            <td>{$product->getExpirationDate()}</td>
+            {if ($product->getExpirationDate() === null )}
+            <td></td>
+            {else}
+            <td>{$product->getExpirationDate()->format('d/m/Y')}</td>
+            {/if}
             <td>
               <button id='{$product->getId()}' onclick="deleteProduct(event)"
                       type="button" class="btn btn-outline-danger w-100">

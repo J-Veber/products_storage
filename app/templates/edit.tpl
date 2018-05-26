@@ -33,7 +33,8 @@
         </div>
         <div class="form-group">
           <label for="expiration_date">Expiration Date</label>
-          <input type="text" class="form-control" name="expiration_date" id="expiration_date" value="">
+          <input type="text" class="form-control datepicker" name="expiration_date" id="expiration_date" data-provide="datepicker"
+                 value="{$product->getExpirationDate()->format('d/m/Y')}">
         </div>
         <div class="btn-group w-100" role="group">
           <button type="submit" class="btn btn-success" id="create"><span>Update</span></button>

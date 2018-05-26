@@ -14,7 +14,7 @@
         $product->setId($_GET['product_id']);
         $product->setName($productResponse[0]->getName());
         $product->setProducer($productResponse[0]->getProducer());
-        $product->setPrice($productResponse[0]->getPrice());
+        $product->setPrice((int)$productResponse[0]->getPrice());
         $product->setCountry($productResponse[0]->getCountry());
         $product->setExpirationDate($productResponse[0]->getExpirationDate());
 
@@ -39,7 +39,7 @@
         $receivedProduct->setProducer($_POST['producer']);
         $receivedProduct->setPrice((int)$_POST['price']);
         $receivedProduct->setCountry($_POST['country']);
-        $receivedProduct->setExpirationDate(null);
+        $receivedProduct->setExpirationDate(DateTime::createFromFormat('d/m/Y', $_POST['expiration_date']));
         $product->updateProduct($receivedProduct);
         header('Location: /list');
       }

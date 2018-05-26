@@ -21,13 +21,14 @@
     /** @Column(type="string")**/
     protected $country;
 
-    /** @Column(type="integer")**/
+    /** @Column(type="float")**/
     protected $price;
 
     /** @Column(type="datetime")**/
     protected $expiration_date;
 
     private $productRepository;
+    private $timeFormat = 'd/m/Y';
 
     public function __construct($entity_manager)
     {
@@ -41,11 +42,12 @@
     }
 
     public function getProductById($product_id): array {
-      if (is_string($product_id)) {
-        return $this->productRepository->findBy(array('id' => $product_id));
-      } else {
-        throw new Error( 'invalid input parameter $product_id in getProductById()');
-      }
+//      if (is_string($product_id)) {
+//
+//      } else {
+//        throw new Error( 'invalid input parameter $product_id in getProductById()');
+//      }
+      return $this->productRepository->findBy(array('id' => $product_id));
     }
 
     public function createProduct($newProduct) {
@@ -61,24 +63,35 @@
       if ($product instanceof Product){
         $this->entity_manager->flush();
       } else {
-        throw new Error('invalid input parameters');
+        throw new Error('invalid input parameters in productModel->updateProduct');
       }
     }
 
     public function deleteProduct($id) {
-      $product = $this->productRepository->find($id);
-      echo 'try to remove product ' . $product->getName();
-      $this->entity_manager->remove($product);
-      $this->entity_manager->flush();
+      if (is_int($id)) {
+        $product = $this->productRepository->find($id);
+        echo 'try to remove product ' . $product->getName();
+        $this->entity_manager->remove($product);
+        $this->entity_manager->flush();
+      } else {
+        throw new Error('invalid input parameters in productModel->deleteProduct');
+      }
     }
+
     /**
      *  =====================================
      *    GETTERS AND SETTERS METHODS
      *  =====================================
      */
+
     public function setId($id)
     {
       $this->id = $id;
+//      if (is_int($id)) {
+//        $this->id = $id;
+//      } else {
+//        throw new Error('invalid input parameters in productModel->setId');
+//      }
     }
 
     public function getId() {
@@ -87,7 +100,11 @@
 
     public function setName($name)
     {
-      $this->name = $name;
+      if (is_string($name)) {
+        $this->name = $name;
+      } else {
+        throw new Error('invalid input parameters in productModel->setName');
+      }
     }
 
     public function getName()
@@ -97,7 +114,11 @@
 
     public function setProducer($producer)
     {
-      $this->producer = $producer;
+      if (is_string($producer)) {
+        $this->producer = $producer;
+      } else {
+        throw new Error('invalid input parameters in productModel->setProducer');
+      }
     }
 
     public function getProducer()
@@ -107,7 +128,11 @@
 
     public function setCountry($country)
     {
-      $this->country = $country;
+      if (is_string($country)) {
+        $this->country = $country;
+      } else {
+        throw new Error('invalid input parameters in productModel->setCountry');
+      }
     }
 
     public function getCountry()
@@ -117,7 +142,11 @@
 
     public function setPrice($price)
     {
-      $this->price = $price;
+      if (is_int($price)) {
+        $this->price = $price;
+      } else {
+        throw new Error('invalid input parameters in productModel->setPrice');
+      }
     }
 
     public function getPrice()
@@ -127,7 +156,16 @@
 
     public function setExpirationDate($expiration_date)
     {
-      $this->expiration_date = $expiration_date;
+      if ($expiration_date instanceof DateTime) {
+        $this->expiration_date = $expiration_date;
+      } else if ($expiration_date === null) {
+        $date = DateTime::createFromFormat( $this->timeFormat, date($this->timeFormat));
+        if(!!$date) {
+          $this->expiration_date = $date;
+        }
+      } else {
+        throw new Error('invalid input parameters in productModel->setExpirationDate');
+      }
     }
 
     public function getExpirationDate()
