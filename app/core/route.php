@@ -42,18 +42,21 @@ class Route
     $controller_path = 'app/controllers/' . $controller_file;
     if (file_exists($controller_path)) {
       include $controller_path;
-    } else {
-      throw new Error('Controller does not exist');
-    }
+      if (strtolower($controller_name) === '404_controller') {
+        $controller_name = 'NotFound_Controller';
+      }
+      $controller = new $controller_name($this->entityManager);
+      $action = $action_name;
 
-    $controller = new $controller_name($this->entityManager);
-    $action = $action_name;
-
-    if (method_exists($controller, $action)) {
-      $controller->$action();
+      if (method_exists($controller, $action)) {
+        $controller->$action();
+      } else {
+        $this->ErrorPage404();
+      }
     } else {
       $this->ErrorPage404();
     }
+
   }
 
   private function ErrorPage404()
