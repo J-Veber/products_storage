@@ -40,8 +40,12 @@
         $receivedProduct->setPrice((int)$_POST['price']);
         $receivedProduct->setCountry($_POST['country']);
         $receivedProduct->setExpirationDate(DateTime::createFromFormat('d/m/Y', $_POST['expiration_date']));
-        $product->updateProduct($receivedProduct);
-        header('Location: /list');
+
+        if (strlen($receivedProduct->getName()) > 0 && strlen($receivedProduct->getPrice()) > 0
+            && (int)$receivedProduct->getPrice() >= 0) {
+          $product->updateProduct($receivedProduct);
+          header('Location: /list');
+        }
       }
     }
   }
