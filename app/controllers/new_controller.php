@@ -4,10 +4,7 @@
   {
     function action_index()
     {
-      $vars = array(
-        'test' => 'Hello'
-      );
-      $this->fenom->display("new.tpl", $vars);
+      $this->fenom->display("new.tpl", []);
     }
 
     function action_save() {
@@ -19,8 +16,11 @@
         $product->setCountry($_POST['country']);
         $product->setExpirationDate(null);
 
-        $product->createProduct($product);
-        header('Location: /list');
+        if (strlen($product->getName()) > 0 && strlen($product->getPrice()) > 0
+          && (int)$product->getPrice() >= 0) {
+          $product->createProduct($product);
+          header('Location: /list');
+        }
       }
     }
   }
