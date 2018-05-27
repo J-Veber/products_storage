@@ -6,6 +6,10 @@
     </div>
   </div>
   <div class="row text-center">
-    <h1 class="w-100 text-dark"><strong>:(<br>Something is wrong</strong></h1>
+    {if !!msg}
+      <h1 class="w-100 text-dark"><strong>:(<br>{$msg}</strong></h1>
+    {else}
+      <h1 class="w-100 text-dark"><strong>:(<br>Something is wrong</strong></h1>
+    {/if}
   </div>
 {/block}

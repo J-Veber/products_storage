@@ -17,7 +17,8 @@
         $product->setExpirationDate($productResponse[0]->getExpirationDate());
 
         if (count($productResponse) > 1) {
-          throw new Error('DB has ' + count($productResponse) + ' record with same id');
+          $this->fenom->display('error.tpl',
+            [ 'msg' => 'DB has ' + count($productResponse) + ' record with same id']);
         } else {
           $this->var = [
             'product' => $product
@@ -25,7 +26,8 @@
         }
         $this->fenom->display("show.tpl", $this->var);
       } else {
-        $this->fenom->display('error.tpl', []);
+        $this->fenom->display('error.tpl',
+          [ 'msg' => 'Cannot get product by id']);
       }
     }
   }

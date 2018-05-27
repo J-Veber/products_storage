@@ -42,11 +42,6 @@
     }
 
     public function getProductById($product_id): array {
-//      if (is_string($product_id)) {
-//
-//      } else {
-//        throw new Error( 'invalid input parameter $product_id in getProductById()');
-//      }
       return $this->productRepository->findBy(array('id' => $product_id));
     }
 
@@ -87,11 +82,6 @@
     public function setId($id)
     {
       $this->id = $id;
-//      if (is_int($id)) {
-//        $this->id = $id;
-//      } else {
-//        throw new Error('invalid input parameters in productModel->setId');
-//      }
     }
 
     public function getId() {
