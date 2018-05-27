@@ -10,24 +10,27 @@
       if (!!$_GET['product_id']) {
         $this->productId = $_GET['product_id'];
         $product = new Product($this->entity_manager);
-        //TODO: повесить обработчик на вывод error page
         $productResponse = $product->getProductById($_GET['product_id']);
-        $product->setId($_GET['product_id']);
-        $product->setName($productResponse[0]->getName());
-        $product->setProducer($productResponse[0]->getProducer());
-        $product->setPrice((int)$productResponse[0]->getPrice());
-        $product->setCountry($productResponse[0]->getCountry());
-        $product->setExpirationDate($productResponse[0]->getExpirationDate());
-
-        if (count($productResponse) > 1) {
+        if (count($productResponse) <= 0) {
           $this->fenom->display('error.tpl',
-            [ 'msg' => 'DB has ' + count($productResponse) + ' record with same id']);
+            [ 'msg' => 'Cannot get product with id= ' . $_GET['product_id']]);
+        } else if (count($productResponse) > 1) {
+          $this->fenom->display('error.tpl',
+            [ 'msg' => 'DB has ' + count($productResponse) . ' record with same id']);
         } else {
+          $product->setId($_GET['product_id']);
+          $product->setName($productResponse[0]->getName());
+          $product->setProducer($productResponse[0]->getProducer());
+          $product->setPrice((int)$productResponse[0]->getPrice());
+          $product->setCountry($productResponse[0]->getCountry());
+          $product->setExpirationDate($productResponse[0]->getExpirationDate());
+
           $this->var = [
             'product' => $product
           ];
+
+          $this->fenom->display("edit.tpl", $this->var);
         }
-        $this->fenom->display("edit.tpl", $this->var);
       } else {
         $this->fenom->display('error.tpl',
           [ 'msg' => 'Cannot get product by id']);
