@@ -18,7 +18,7 @@
 
         if (count($productResponse) > 1) {
           $this->fenom->display('error.tpl',
-            [ 'msg' => 'DB has ' + count($productResponse) + ' record with same id']);
+            [ 'msg' => 'DB has ' . count($productResponse) . ' record with same id']);
         } else {
           $this->var = [
             'product' => $product

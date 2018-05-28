@@ -16,7 +16,7 @@
             [ 'msg' => 'Cannot get product with id= ' . $_GET['product_id']]);
         } else if (count($productResponse) > 1) {
           $this->fenom->display('error.tpl',
-            [ 'msg' => 'DB has ' + count($productResponse) . ' record with same id']);
+            [ 'msg' => 'DB has ' . count($productResponse) . ' record with same id']);
         } else {
           $product->setId($_GET['product_id']);
           $product->setName($productResponse[0]->getName());
