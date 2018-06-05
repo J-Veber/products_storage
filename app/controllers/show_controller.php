@@ -3,13 +3,13 @@
     public $var = [];
     public $product;
 
-    function action_index()
+    function action_index($product_id = NULL)
     {
-      if (!!$_GET['product_id']) {
-        $this->productId = $_GET['product_id'];
+      if (!!$product_id) {
+        $this->productId = $product_id;
         $product = new Product($this->entity_manager);
-        $productResponse = $product->getProductById($_GET['product_id']);
-        $product->setId($_GET['product_id']);
+        $productResponse = $product->getProductById($product_id);
+        $product->setId($product_id);
         $product->setName($productResponse[0]->getName());
         $product->setProducer($productResponse[0]->getProducer());
         $product->setPrice((int)$productResponse[0]->getPrice());

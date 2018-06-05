@@ -20,8 +20,10 @@ document.getElementById('submit').addEventListener('click', () =>{
        case 'price':
          if (form.elements[element_key].value.length === 0) {
            showPatternError(form.elements[element_key], 'This is a required field');
-         } else if (!form.elements[element_key].value.match(/[+-]?([0-9]*[.])?[0-9]+/)) {
+         } else if (!form.elements[element_key].value.match(/^[+-]?([0-9]*[.])?[0-9]+$/g)) {
            showPatternError(form.elements[element_key], 'This is a numeric field');
+         } else if (form.elements[element_key].value < 0) {
+           showPatternError(form.elements[element_key], 'Price can not be negative');
          } else {
            hidePatternError(form.elements[element_key]);
          }

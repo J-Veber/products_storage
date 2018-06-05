@@ -11,7 +11,7 @@
       $this->product = new Product($this->entity_manager);
     }
 
-    public function action_index()
+    public function action_index($product_id = null)
     {
       $this->displayAllProducts();
     }

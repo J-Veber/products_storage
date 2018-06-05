@@ -5,12 +5,15 @@
     public $var = [];
     public $productId;
 
-    function action_index()
+    function action_index($product_id = null)
     {
-      if (!!$_GET['product_id']) {
-        $this->productId = $_GET['product_id'];
+      if (!!$_POST) {
+        $this->action_save();
+      }
+      if (!!$product_id) {
+        $this->productId = $product_id;
         $product = new Product($this->entity_manager);
-        $productResponse = $product->getProductById($_GET['product_id']);
+        $productResponse = $product->getProductById($product_id);
         if (count($productResponse) <= 0) {
           $this->fenom->display('error.tpl',
             [ 'msg' => 'Cannot get product with id= ' . $_GET['product_id']]);
@@ -18,7 +21,7 @@
           $this->fenom->display('error.tpl',
             [ 'msg' => 'DB has ' . count($productResponse) . ' record with same id']);
         } else {
-          $product->setId($_GET['product_id']);
+          $product->setId($product_id);
           $product->setName($productResponse[0]->getName());
           $product->setProducer($productResponse[0]->getProducer());
           $product->setPrice((int)$productResponse[0]->getPrice());

@@ -7,7 +7,7 @@
   </div>
   <div class="row">
     <div class="col-12">
-      <form class="needs-validation" method="post" action="/new/save">
+      <form class="needs-validation" method="post">
         <div class="form-group">
           <label for="name">Product Name</label>
           <input type="text" class="form-control" name="name" id="name">
@@ -35,11 +35,11 @@
           <div class="feedback"></div>
         </div>
         <div class="btn-group w-100 mt-3" role="group">
+          <a class="btn btn-secondary" href="/list">
+            <span>Cancel</span>
+          </a>
           <button type="submit" class="btn btn-success" id="submit">
             <span>Create</span>
-          </button>
-          <button onclick="window.location.href = '/list'" class="btn btn-secondary">
-            <span>Cancel</span>
           </button>
         </div>
       </form>

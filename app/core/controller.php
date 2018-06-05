@@ -19,7 +19,7 @@ class Controller
     $this->entity_manager = $entity_manager;
   }
 
-  public function action_index()
+  public function action_index($product_id = null)
   {
 
   }

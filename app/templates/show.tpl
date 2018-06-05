@@ -29,7 +29,7 @@
         <div class="form-group row border-bottom">
           <label for="producer" class="col-sm-4 col-form-label font-weight-bold">Producer</label>
           <div class="col-sm-8">
-            <input type="text" readonly class="form-control-plaintext" id="producer" value="{$product->getCountry()}">
+            <input type="text" readonly class="form-control-plaintext" id="producer" value="{$product->getProducer()}">
           </div>
         </div>
         <div class="form-group row border-bottom">
@@ -47,10 +47,12 @@
         </div>
       </form>
       <hr class="my-4">
-      <button onclick="window.location.href = '/list'" class="btn btn-secondary">
-        <clr-icon shape="arrow" dir="left"></clr-icon>
-        <span>Go Back</span>
-      </button>
+      <a class="btn btn-secondary" href="/list">
+        <div>
+          <clr-icon shape="arrow" dir="left"></clr-icon>
+          <span>Go Back</span>
+        </div>
+      </a>
     </div>
   </div>
 {/block}

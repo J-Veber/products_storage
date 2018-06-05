@@ -46,10 +46,14 @@
             <td>{$product->getExpirationDate()->format('d/m/Y')}</td>
             {/if}
             <td>
-              <clr-icon id='edit_{$product->getId()}' shape="pencil" size="22" class="is-highlight"
-                        alt="Edit product" onclick="editProduct({$product->getId()})"></clr-icon>
-              <clr-icon id='show_{$product->getId()}' shape="help-info" size="22" class="is-warning"
-                        alt="Show product info" onclick="showProduct({$product->getId()})"></clr-icon>
+              <a href='/edit/{$product->getId()}'>
+                <clr-icon id='edit_{$product->getId()}' shape="pencil" size="22" class="is-highlight"
+                          alt="Edit product"></clr-icon>
+              </a>
+              <a href='/show/{$product->getId()}'>
+                <clr-icon id='show_{$product->getId()}' shape="help-info" size="22" class="is-warning"
+                          alt="Show product info"></clr-icon>
+              </a>
               <clr-icon id='{$product->getId()}' onclick="deleteProduct(event)"
                         shape="trash" size="22" class="is-error"
                         alt="Delete product"></clr-icon>
