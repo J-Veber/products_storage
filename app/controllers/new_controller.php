@@ -17,7 +17,11 @@
         $product->setProducer($_POST['producer']);
         $product->setPrice((int)$_POST['price']);
         $product->setCountry($_POST['country']);
-        $product->setExpirationDate(null);
+        if (!!$_POST['expiration_date']) {
+          $product->setExpirationDate(DateTime::createFromFormat('Y/m/d', $_POST['expiration_date']));
+        } else {
+          $product->setExpirationDate(null);
+        }
 
         if (strlen($product->getName()) > 0 && strlen($product->getPrice()) > 0
           && (int)$product->getPrice() >= 0) {

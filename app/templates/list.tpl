@@ -43,7 +43,7 @@
             {if ($product->getExpirationDate() === null )}
             <td></td>
             {else}
-            <td>{$product->getExpirationDate()->format('d/m/Y')}</td>
+            <td>{$product->getExpirationDate()->format('Y/m/d')}</td>
             {/if}
             <td>
               <a href='/edit/{$product->getId()}'>

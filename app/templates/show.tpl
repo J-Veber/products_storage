@@ -40,10 +40,17 @@
         </div>
         <div class="form-group row">
           <label for="expiration_date" class="col-sm-4 col-form-label font-weight-bold">Expiration Date</label>
-          <div class="col-sm-8">
-            <input type="text" readonly class="form-control-plaintext" id="expiration_date"
-                   value="{$product->getExpirationDate()->format('d/m/Y')}">
-          </div>
+          {if is_null($product->getExpirationDate())}
+            <div class="col-sm-8">
+              <input type="text" readonly class="form-control-plaintext" id="expiration_date"
+                     value="">
+            </div>
+          {else}
+            <div class="col-sm-8">
+              <input type="text" readonly class="form-control-plaintext" id="expiration_date"
+                     value="{$product->getExpirationDate()->format('Y/m/d')}">
+            </div>
+          {/if}
         </div>
       </form>
       <hr class="my-4">

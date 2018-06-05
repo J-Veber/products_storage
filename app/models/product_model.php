@@ -148,13 +148,6 @@
     {
       if ($expiration_date instanceof DateTime) {
         $this->expiration_date = $expiration_date;
-      } else if ($expiration_date === null) {
-        $date = DateTime::createFromFormat( $this->timeFormat, date($this->timeFormat));
-        if(!!$date) {
-          $this->expiration_date = $date;
-        }
-      } else {
-        throw new Error('invalid input parameters in productModel->setExpirationDate');
       }
     }
 

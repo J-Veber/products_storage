@@ -63,9 +63,18 @@ function filter_products(event) {
 function compare(product, word){
   let result = false;
   Object.keys(product).forEach( key => {
-    if (!result && product[key]) {
-      result = product[key].toString().indexOf(word) !== -1 || result;
+    if ( key === 'expiration_date') {
+      if (!result && product[key]) {
+        let date = product[key].date.substr(0, product[key].date.indexOf(' '));
+        date = date.replace(/-/g, '/');
+        result = date.indexOf(word) !== -1 || result;
+      }
+    } else {
+      if (!result && product[key]) {
+        result = product[key].toString().indexOf(word) !== -1 || result;
+      }
     }
+
   });
   return !result;
 }

@@ -9,20 +9,20 @@ document.getElementById('submit').addEventListener('click', () =>{
            showPatternError(form.elements[element_key], 'This is a required field');
          } else if (!form.elements[element_key].value.match(/[\d\w\s]{1,20}/)) {
            showPatternError(form.elements[element_key], 'This field should consist of: any letters, numbers? symbol "_" and spaces');
-         } else if (form.elements[element_key].value.length > 20) {
-           showPatternError(form.elements[element_key], 'So long value');
+         } else if (form.elements[element_key].value.length > 120) {
+           showPatternError(form.elements[element_key], 'Value should be less than 120 characters');
          } else {
            hidePatternError(form.elements[element_key]);
          }
          break;
        case 'country':
          if (form.elements[element_key].value.length > 15) {
-           showPatternError(form.elements[element_key], 'So long value');
+           showPatternError(form.elements[element_key], 'Value should be less than 15 characters');
          }
          break;
        case 'producer':
          if (form.elements[element_key].value.length > 20) {
-           showPatternError(form.elements[element_key], 'So long value');
+           showPatternError(form.elements[element_key], 'Value should be less than 20 characters');
          }
          break;
        case 'price':
@@ -37,9 +37,10 @@ document.getElementById('submit').addEventListener('click', () =>{
          }
          break;
        case 'expiration_date':
-         if (!form.elements[element_key].value.match(/\d\d\/\d\d\/\d\d\d\d/) &&
+         if ((!form.elements[element_key].value.match(/\d\d\d\d\/\d\d\/\d\d/) &&
+           !form.elements[element_key].value.match(/\d\d\/\d\d\/\d\d\d\d/))&&
            form.elements[element_key].value.length !== 0) {
-           showPatternError(form.elements[element_key], 'This is a date field with pattern: dd/mm/yyyy');
+           showPatternError(form.elements[element_key], 'This is a date field with pattern: yyyy/mm/dd');
          } else {
            hidePatternError(form.elements[element_key]);
          }

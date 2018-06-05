@@ -48,7 +48,11 @@
         $receivedProduct->setProducer($_POST['producer']);
         $receivedProduct->setPrice((int)$_POST['price']);
         $receivedProduct->setCountry($_POST['country']);
-        $receivedProduct->setExpirationDate(DateTime::createFromFormat('d/m/Y', $_POST['expiration_date']));
+        if (!!$_POST['expiration_date']) {
+          $receivedProduct->setExpirationDate(DateTime::createFromFormat('Y/m/d', $_POST['expiration_date']));
+        } else {
+          $receivedProduct->setExpirationDate(null);
+        }
 
         if (strlen($receivedProduct->getName()) > 0 && strlen($receivedProduct->getPrice()) > 0
             && (int)$receivedProduct->getPrice() >= 0) {

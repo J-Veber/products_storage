@@ -34,9 +34,19 @@
         </div>
         <div class="form-group">
           <label for="expiration_date">Expiration Date</label>
-          <input type="text" class="form-control datepicker" name="expiration_date" id="expiration_date" data-provide="datepicker"
-                 value="{$product->getExpirationDate()->format('d/m/Y')}">
-          <div class="feedback"></div>
+          {if is_null($product->getExpirationDate())}
+            <input data-toggle="datepicker" type="text" class="form-control datepicker" name="expiration_date" id="expiration_date" data-provide="datepicker"
+                   value="">
+            <div class="feedback"></div>
+            <textarea data-toggle="datepicker"></textarea>
+            <div data-toggle="datepicker"></div>
+          {else}
+            <input data-toggle="datepicker" type="text" class="form-control datepicker" name="expiration_date" id="expiration_date" data-provide="datepicker"
+                   value="{$product->getExpirationDate()->format('Y/m/d')}">
+            <div class="feedback"></div>
+            {*<textarea data-toggle="datepicker"></textarea>*}
+            {*<div data-toggle="datepicker"></div>*}
+          {/if}
         </div>
         <div class="btn-group w-100" role="group">
           <a class="btn btn-secondary" href="/list">
@@ -50,11 +60,13 @@
 {/block}
 {block 'scripts'}
   <script type="text/javascript" src="/node_modules/jquery/dist/jquery.min.js"></script>
-  <script type="text/javascript"
-          src="/node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
-  <link rel="stylesheet"
-        href="/node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css"/>
+  {*<script type="text/javascript"*}
+          {*src="/node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>*}
+  {*<link rel="stylesheet"*}
+        {*href="/node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css"/>*}
   <link rel="stylesheet" href="/public/css/template.css">
   <script async rel="script" src="/public/js/validation.js" type="text/javascript"></script>
   <script async rel="script" src="/public/js/datepicker.js" type="text/javascript"></script>
+  <link  href="/node_modules/@fengyuanchen/datepicker/dist/datepicker.css" rel="stylesheet">
+  <script src="/node_modules/@fengyuanchen/datepicker/dist/datepicker.js"></script>
 {/block}
