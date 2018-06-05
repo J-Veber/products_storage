@@ -141,7 +141,7 @@
 
     public function getPrice()
     {
-      return $this->price;
+      return number_format($this->price, 0,'.','');
     }
 
     public function setExpirationDate($expiration_date)

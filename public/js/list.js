@@ -77,19 +77,3 @@ function compare(product, word){
 function remove(product_id) {
   document.getElementById('product_' + product_id).remove();
 }
-
-/**
- * @description open /edit for current product
- * @param product_id - current product
- */
-function editProduct(product_id) {
-  window.location.href = '/edit?product_id='+product_id;
-}
-
-/**
- * @description open /show for current product
- * @param product_id
- */
-function showProduct(product_id) {
-  window.location.href = '/show?product_id='+product_id;
-}

@@ -9,13 +9,21 @@ document.getElementById('submit').addEventListener('click', () =>{
            showPatternError(form.elements[element_key], 'This is a required field');
          } else if (!form.elements[element_key].value.match(/[\d\w\s]{1,20}/)) {
            showPatternError(form.elements[element_key], 'This field should consist of: any letters, numbers? symbol "_" and spaces');
+         } else if (form.elements[element_key].value.length > 20) {
+           showPatternError(form.elements[element_key], 'So long value');
          } else {
            hidePatternError(form.elements[element_key]);
          }
          break;
        case 'country':
+         if (form.elements[element_key].value.length > 15) {
+           showPatternError(form.elements[element_key], 'So long value');
+         }
          break;
        case 'producer':
+         if (form.elements[element_key].value.length > 20) {
+           showPatternError(form.elements[element_key], 'So long value');
+         }
          break;
        case 'price':
          if (form.elements[element_key].value.length === 0) {
@@ -23,7 +31,7 @@ document.getElementById('submit').addEventListener('click', () =>{
          } else if (!form.elements[element_key].value.match(/^[+-]?([0-9]*[.])?[0-9]+$/g)) {
            showPatternError(form.elements[element_key], 'This is a numeric field');
          } else if (form.elements[element_key].value < 0) {
-           showPatternError(form.elements[element_key], 'Price can not be negative');
+           showPatternError(form.elements[element_key], 'Price cannot be negative');
          } else {
            hidePatternError(form.elements[element_key]);
          }
