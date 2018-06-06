@@ -1,5 +1,24 @@
 body {
   font-family: 'Tajawal', sans-serif;
+  display: flex;
+  max-height: 100vh;
+}
+
+body > .container {
+  display: flex;
+  flex-direction: column;
+}
+
+body > .container .row {
+  display: flex;
+  flex-basis: auto;
+  flex-grow: 1;
+  flex-direction: column;
+  justify-content: center;
+}
+
+body > .container .row:last-child {
+  flex-basis: 100%;
 }
 
 .d-none {
@@ -46,4 +65,8 @@ clr-icon:hover {
 a:hover {
   text-decoration: none!important;
   outline: none!important;
+}
+
+.table-container {
+  overflow-x: scroll;
 }
