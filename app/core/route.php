@@ -50,20 +50,21 @@ class Route
       $controller = new $controller_name($this->entityManager);
       $action = $action_name;
 
-//      if (method_exists($controller, $action($action_parameter))) {
-//        if (strlen($action_parameter) > 0) {
-//          $controller->$action($action_parameter);
-//        } else {
-//          $controller->$action(null);
-//        }
-//      } else {
-//        $this->ErrorPage404();
-//      }
-      if (strlen($action_parameter) > 0) {
-        $controller->$action($action_parameter);
+      if (method_exists($controller, $action)) {
+        if (strlen($action_parameter) > 0) {
+          $controller->$action($action_parameter);
+        } else {
+          $controller->$action(null);
+        }
       } else {
-        $controller->$action(null);
+        $this->ErrorPage404();
       }
+//
+//      if (strlen($action_parameter) > 0 ) {
+//        $controller->$action($action_parameter);
+//      } else {
+//        $controller->$action(null);
+//      }
     } else {
       $this->ErrorPage404();
     }
@@ -72,9 +73,10 @@ class Route
 
   private function ErrorPage404()
   {
-    $host = 'http://' . $_SERVER['HTTP_HOST'] . '/';
-    header('HTTP/1.1 404 Not Found');
-    header('Status: 404 Not Found');
-    header('Location: ' . $host . '404');
+//    $host = 'http://' . $_SERVER['HTTP_HOST'] . '/';
+//    header('HTTP/1.1 404 Not Found');
+//    header('Status: 404 Not Found');
+//    header('Location: ' . $host . '404');
+    header('Location: /404');
   }
 }

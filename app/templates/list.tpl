@@ -19,49 +19,52 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-12 table-container">
-      <table class="table table-striped">
-        <thead>
-        <tr>
-          <th scope="col">ID</th>
-          <th scope="col">Name</th>
-          <th scope="col">Producer</th>
-          <th scope="col">Country</th>
-          <th scope="col">Price</th>
-          <th scope="col">Expiration Date</th>
-          <th scope="col">Actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        {foreach $products as $product}
-          <tr id="product_{$product->getId()}">
-            <th scope="row">{$product->getId()}</th>
-            <td>{$product->getName()}</td>
-            <td>{$product->getProducer()}</td>
-            <td>{$product->getCountry()}</td>
-            <td>{$product->getPrice()}</td>
-            {if ($product->getExpirationDate() === null )}
-            <td></td>
-            {else}
-            <td>{$product->getExpirationDate()->format('Y/m/d')}</td>
-            {/if}
-            <td>
-              <a href='/edit/{$product->getId()}'>
-                <clr-icon id='edit_{$product->getId()}' shape="pencil" size="22" class="is-highlight"
-                          alt="Edit product"></clr-icon>
-              </a>
-              <a href='/show/{$product->getId()}'>
-                <clr-icon id='show_{$product->getId()}' shape="help-info" size="22" class="is-warning"
-                          alt="Show product info"></clr-icon>
-              </a>
-              <clr-icon id='{$product->getId()}' onclick="deleteProduct(event)"
-                        shape="trash" size="22" class="is-error"
-                        alt="Delete product"></clr-icon>
-            </td>
+    <div class="col-12">
+      <div class="table-container">
+        <table class="table table-striped">
+          <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Producer</th>
+            <th scope="col">Country</th>
+            <th scope="col">Price</th>
+            <th scope="col">Expiration Date</th>
+            <th scope="col">Actions</th>
           </tr>
-        {/foreach}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+          {foreach $products as $product}
+            <tr id="product_{$product->getId()}">
+              <th scope="row">{$product->getId()}</th>
+              <td>{$product->getName()}</td>
+              <td>{$product->getProducer()}</td>
+              <td>{$product->getCountry()}</td>
+              <td>{$product->getPrice()}</td>
+              {if ($product->getExpirationDate() === null )}
+                <td></td>
+              {else}
+                <td>{$product->getExpirationDate()->format('Y/m/d')}</td>
+              {/if}
+              <td>
+                <a href='/edit/{$product->getId()}'>
+                  <clr-icon id='edit_{$product->getId()}' shape="pencil" size="22" class="is-highlight"
+                            alt="Edit product"></clr-icon>
+                </a>
+                <a href='/show/{$product->getId()}'>
+                  <clr-icon id='show_{$product->getId()}' shape="help-info" size="22" class="is-warning"
+                            alt="Show product info"></clr-icon>
+                </a>
+                <clr-icon id='{$product->getId()}' onclick="deleteProduct(event)"
+                          shape="trash" size="22" class="is-error"
+                          alt="Delete product"></clr-icon>
+              </td>
+            </tr>
+          {/foreach}
+          </tbody>
+        </table>
+      </div>
+
     </div>
   </div>
 {/block}
