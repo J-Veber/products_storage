@@ -1,17 +1,16 @@
 let products = [];
 
 window.onload = () => {
-  const xhr = new XMLHttpRequest();
-  xhr.open("GET", '/list/all', true);
-  xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
-  xhr.send();
-  xhr.onload = function () {
-    if (xhr.status === 200) {
-      products = JSON.parse(xhr.response);
-    }
-  };
+  products = sendGetAllRequest();
+  var searchInput = document.getElementById('search');
+  if (!!searchInput ) {
+    document.addEventListener('keydown', function(key) {
+      if (key.key.toLowerCase() === 'enter') {
+        sendSearchRequest(searchInput.value);
+      }
+    });
+  }
 };
-
 
 /**
  * @description send delete request and remove row from table
@@ -53,6 +52,38 @@ function filter_products(event) {
       }
     }
   }
+}
+
+function sendSearchRequest(searchValue) {
+  if (!searchValue) {
+    searchValue = document.getElementById('search').value;
+  }
+  var xhr = new XMLHttpRequest();
+  xhr.open('POST', '/list/search', false);
+  xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+  xhr.send(JSON.stringify({'searchValue': searchValue}));
+
+  if (xhr.status !== 200) {
+    console.log( xhr.status + ': ERROR' + xhr.statusText ); // пример вывода: 404: Not Found
+  } else {
+    console.log( xhr.responseText ); // responseText -- текст ответа.
+  }
+}
+
+/**
+ * @description get all products from list_controller:action_all
+ * @return {object[]} - all products
+ */
+function sendGetAllRequest() {
+  const xhr = new XMLHttpRequest();
+  xhr.open("GET", '/list/all', true);
+  xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+  xhr.send();
+  xhr.onload = function () {
+    if (xhr.status === 200) {
+      return JSON.parse(xhr.response);
+    }
+  };
 }
 
 /**

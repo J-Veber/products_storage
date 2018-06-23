@@ -1,4 +1,5 @@
 <?php
+use Doctrine\ORM\Query\ResultSetMapping;
 
   class List_Controller extends Controller
   {
@@ -16,15 +17,57 @@
       $this->displayAllProducts();
     }
 
+    public function action_search()
+    {
+      $data = parent::getPhpInputParameter();
+      $searchKeys = mb_split(' ', $data['searchValue']);
+      $products = [];
+
+      foreach ( $searchKeys as $searchKey ) {
+
+        //TODO: удалить дублирующиеся записи
+        //TODO: orWhere не работает
+        $query = $this->entity_manager->createQueryBuilder();
+        $a = $query
+          ->select('u')
+          ->from('Product', 'u')
+          ->where("u.name LIKE '%" . $searchKey . "%'")
+          ->orWhere("u.producer LIKE '%" . $searchKey . "%'")
+          ->orWhere("u.country LIKE '%" . $searchKey . "%'")
+          ->orWhere("u.price LIKE '%" . $searchKey . "%'")
+          ->orWhere("u.expiration_date LIKE '%" . $searchKey . "%'");
+        $queryProducts = $a->getQuery()->getResult();
+        foreach ($queryProducts as $queryProduct) {
+          array_push($products, $queryProduct);
+        }
+      }
+      $this->sendProductsToClient($products);
+    }
+
     public function action_delete()
     {
-      $data = json_decode(file_get_contents('php://input'), true);
+      $data = parent::getPhpInputParameter();
       $this->product = new Product($this->entity_manager);
       $this->product->deleteProduct((int)$data['id']);
     }
 
     public function action_all() {
       $products = $this->getAllProducts();
+      $this->sendProductsToClient($products);
+    }
+
+    private function getAllProducts() {
+      return $this->product->getAllProducts();
+    }
+
+    private function displayAllProducts() {
+      $this->var = [
+        'products' => $this->getAllProducts()
+      ];
+      $this->fenom->display("list.tpl", $this->var);
+    }
+
+    private function sendProductsToClient($products) {
       $response = [];
       foreach ( $products as $product ) {
         array_push($response,
@@ -39,16 +82,5 @@
         );
       }
       echo json_encode($response);
-    }
-
-    private function getAllProducts() {
-      return $this->product->getAllProducts();
-    }
-
-    private function displayAllProducts() {
-      $this->var = [
-        'products' => $this->getAllProducts()
-      ];
-      $this->fenom->display("list.tpl", $this->var);
     }
   }

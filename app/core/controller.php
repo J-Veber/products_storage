@@ -23,4 +23,8 @@ class Controller
   {
 
   }
+
+  protected function getPhpInputParameter() {
+    return json_decode(file_get_contents('php://input'), true);
+  }
 }
