@@ -11,8 +11,8 @@
         <div class="form-group">
           <input type="text" class="form-control" id="search" placeholder="Find products by..">
         </div>
-        <clr-icon shape="search" size="32" class="is-success mx-2 mb-3"
-                  alt="Add new product" onclick="sendSearchRequest()"></clr-icon>
+        <clr-icon shape="search" id="btn-search" size="32" class="is-success mx-2 mb-3"
+                  alt="Add new product"></clr-icon>
         <clr-icon shape="plus" size="32" class="is-success mx-2 mb-3"
                   alt="Add new product" onclick="window.location.href='/new'"></clr-icon>
       </div>

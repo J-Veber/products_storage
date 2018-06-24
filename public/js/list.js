@@ -1,16 +1,37 @@
-let products = [];
+window.products = [];
 
 window.onload = () => {
-  products = sendGetAllRequest();
+  window.products = sendGetAllRequest();
   var searchInput = document.getElementById('search');
   if (!!searchInput ) {
-    document.addEventListener('keydown', function(key) {
+    searchInput.addEventListener('keydown', function(key) {
       if (key.key.toLowerCase() === 'enter') {
-        sendSearchRequest(searchInput.value);
+
+        filterProducts(searchInput);
       }
     });
   }
+
+  var searchBtn = document.getElementById('btn-search');
+  if (!!searchBtn) {
+    searchBtn.addEventListener('click', function () {
+      filterProducts(searchInput);
+    })
+  }
 };
+
+function filterProducts(searchInput) {
+  var receivedProducts = searchInput.value.length > 0 ? sendSearchRequest(searchInput.value): window.products;
+
+  window.products.forEach( function(product) {
+    const row = document.getElementById('product_' + product.id);
+    if (!receivedProducts.find( receivedProduct => receivedProduct.id === product.id)) {
+      row.classList.add('d-none');
+    } else {
+      row.classList.remove('d-none');
+    }
+  });
+}
 
 /**
  * @description send delete request and remove row from table
@@ -31,30 +52,11 @@ function deleteProduct(event) {
 }
 
 /**
- * @description filter all products in table
- * @param event
+ * @description get filtered products from list_controller:action_search
+ * @return {object[]} - filtered products
  */
-function filter_products(event) {
-  let filteredProducts = products;
-  const filterString = event.target.value;
-  if (filterString.length >= 0) {
-    const filterWords = filterString.split(' ');
-    for (let i = 0; i<filteredProducts.length; i++) {
-      let isFinded = true;
-      for (let q = 0; q < filterWords.length && isFinded; q++) {
-        isFinded = !compare(products[i], filterWords[q]) && isFinded;
-      }
-      const row = document.getElementById('product_' + products[i].id);
-      if (!isFinded) {
-        row.classList.add('d-none');
-      } else {
-        row.classList.remove('d-none');
-      }
-    }
-  }
-}
-
 function sendSearchRequest(searchValue) {
+
   if (!searchValue) {
     searchValue = document.getElementById('search').value;
   }
@@ -64,9 +66,9 @@ function sendSearchRequest(searchValue) {
   xhr.send(JSON.stringify({'searchValue': searchValue}));
 
   if (xhr.status !== 200) {
-    console.log( xhr.status + ': ERROR' + xhr.statusText ); // пример вывода: 404: Not Found
+    console.log( xhr.status + ': ' + xhr.statusText );
   } else {
-    console.log( xhr.responseText ); // responseText -- текст ответа.
+    return JSON.parse(xhr.response);
   }
 }
 
@@ -76,38 +78,12 @@ function sendSearchRequest(searchValue) {
  */
 function sendGetAllRequest() {
   const xhr = new XMLHttpRequest();
-  xhr.open("GET", '/list/all', true);
+  xhr.open("GET", '/list/all', false);
   xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
   xhr.send();
-  xhr.onload = function () {
-    if (xhr.status === 200) {
-      return JSON.parse(xhr.response);
-    }
-  };
-}
-
-/**
- * @description search word in Product Object
- * @param product
- * @param word
- */
-function compare(product, word){
-  let result = false;
-  Object.keys(product).forEach( key => {
-    if ( key === 'expiration_date') {
-      if (!result && product[key]) {
-        let date = product[key].date.substr(0, product[key].date.indexOf(' '));
-        date = date.replace(/-/g, '/');
-        result = date.indexOf(word) !== -1 || result;
-      }
-    } else {
-      if (!result && product[key]) {
-        result = product[key].toString().indexOf(word) !== -1 || result;
-      }
-    }
-
-  });
-  return !result;
+  if (xhr.status === 200) {
+    return JSON.parse(xhr.response);
+  }
 }
 
 /**
