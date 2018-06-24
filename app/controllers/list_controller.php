@@ -25,20 +25,19 @@ use Doctrine\ORM\Query\ResultSetMapping;
 
       foreach ( $searchKeys as $searchKey ) {
 
-        //TODO: удалить дублирующиеся записи
-        //TODO: orWhere не работает
         $query = $this->entity_manager->createQueryBuilder();
         $a = $query
           ->select('u')
           ->from('Product', 'u')
-          ->where("u.name LIKE '%" . $searchKey . "%'")
-          ->orWhere("u.producer LIKE '%" . $searchKey . "%'")
-          ->orWhere("u.country LIKE '%" . $searchKey . "%'")
-          ->orWhere("u.price LIKE '%" . $searchKey . "%'")
-          ->orWhere("u.expiration_date LIKE '%" . $searchKey . "%'");
+          ->where("u.id LIKE '%" . $searchKey . "%' 
+          OR u.name LIKE '%" . $searchKey . "%' OR u.producer LIKE '%" . $searchKey . "%'
+          OR u.country LIKE '%" . $searchKey . "%' OR u.price LIKE '%" . $searchKey . "%'
+          OR u.expiration_date LIKE '%" . $searchKey . "%'");
         $queryProducts = $a->getQuery()->getResult();
         foreach ($queryProducts as $queryProduct) {
-          array_push($products, $queryProduct);
+          if (!in_array($queryProduct, $products)) {
+            array_push($products, $queryProduct);
+          }
         }
       }
       $this->sendProductsToClient($products);
