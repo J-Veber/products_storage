@@ -41,6 +41,28 @@
       return $products;
     }
 
+    public function getFilteredProducts($searchValue) {
+      $res = [];
+      $products = $this->getAllProducts();
+      $searchKeys = mb_split(' ', $searchValue);
+
+      for ($i = 0; $i<count($products); $i++) {
+        $notFinded = true;
+        for ($q = 0; $q < count($searchKeys) && $notFinded; $q++) {
+          $notFinded = $this->compare($products[$i], $searchKeys[$q]) && $notFinded;
+          var_dump($searchKeys[$q]);
+          var_dump($this->compare($products[$i], $searchKeys[$q]));
+        }
+        var_dump($notFinded);
+//        var_dump($products[$i]);
+
+        if (!$notFinded) {
+          array_push($res, $products[$i]);
+        }
+      }
+//      var_dump($res);
+    }
+
     public function getProductById($product_id): array {
       return $this->productRepository->findBy(array('id' => $product_id));
     }
@@ -154,5 +176,20 @@
     public function getExpirationDate()
     {
       return $this->expiration_date;
+    }
+
+    /**
+     * @description search word in Product Object
+     * @param product
+     * @param word
+     * @return bool
+     */
+    private function compare($product, $word){
+      return
+        !!strpos($product->getId(), $word) ||
+        !!strpos($product->getName(), $word) ||
+        !!strpos($product->getCountry(), $word) ||
+        !!strpos($product->getPrice(), $word) ||
+        !!strpos($product->getProducer(), $word);
     }
   }
