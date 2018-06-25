@@ -9,7 +9,7 @@
     <div class="col-12">
       <div class="d-flex">
         <div class="form-group">
-          <input type="text" class="form-control" id="search" placeholder="Find products by..">
+          <input type="text" class="form-control" id="search" placeholder="Find products by [ id, name, producer, country, price ]">
         </div>
         <clr-icon shape="search" id="btn-search" size="32" class="is-success mx-2 mb-3"
                   alt="Add new product"></clr-icon>

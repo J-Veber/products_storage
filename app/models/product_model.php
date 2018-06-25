@@ -41,26 +41,22 @@
       return $products;
     }
 
-    public function getFilteredProducts($searchValue) {
+    public function getFilteredProducts($searchValue): array {
       $res = [];
       $products = $this->getAllProducts();
       $searchKeys = mb_split(' ', $searchValue);
 
       for ($i = 0; $i<count($products); $i++) {
-        $notFinded = true;
-        for ($q = 0; $q < count($searchKeys) && $notFinded; $q++) {
-          $notFinded = $this->compare($products[$i], $searchKeys[$q]) && $notFinded;
-          var_dump($searchKeys[$q]);
-          var_dump($this->compare($products[$i], $searchKeys[$q]));
+        $isFinded = true;
+        for ($q = 0; $q < count($searchKeys) && $isFinded; $q++) {
+          $isFinded = $this->compare($products[$i], $searchKeys[$q]) && $isFinded;
         }
-        var_dump($notFinded);
-//        var_dump($products[$i]);
 
-        if (!$notFinded) {
+        if ($isFinded) {
           array_push($res, $products[$i]);
         }
       }
-//      var_dump($res);
+      return $res;
     }
 
     public function getProductById($product_id): array {
@@ -186,10 +182,10 @@
      */
     private function compare($product, $word){
       return
-        !!strpos($product->getId(), $word) ||
-        !!strpos($product->getName(), $word) ||
-        !!strpos($product->getCountry(), $word) ||
-        !!strpos($product->getPrice(), $word) ||
-        !!strpos($product->getProducer(), $word);
+        strpos($product->getId(), $word) !== false ||
+        strpos($product->getName(), $word) !== false ||
+        strpos($product->getCountry(), $word) !== false ||
+        strpos($product->getPrice(), $word) !== false ||
+        strpos($product->getProducer(), $word) !== false;
     }
   }

@@ -23,38 +23,7 @@ use Doctrine\ORM\Query\ResultSetMapping;
 
       $products = $this->product->getFilteredProducts($data['searchValue']);
 
-//      echo "u.name LIKE '%" . $data['searchValue'] . "%'";
-//      $query = $this->entity_manager->createQueryBuilder();
-//      $a = $query
-//        ->select('u')
-//        ->from('Product', 'u')
-//        ->where("u.name LIKE '%" . $data['searchValue'] . "%'");
-//      $queryProducts = $a->getQuery()->getResult();
-//      foreach ($queryProducts as $queryProduct) {
-//        if (!in_array($queryProduct, $products)) {
-//          array_push($products, $queryProduct);
-//        }
-//      }
-
-//      foreach ( $searchKeys as $searchKey ) {
-//
-//        $query = $this->entity_manager->createQueryBuilder();
-//        $a = $query
-//          ->select('u')
-//          ->from('Product', 'u')
-//          ->where("u.id LIKE '%" . $searchKey . "%'
-//          OR u.name LIKE '%" . $searchKey . "%' OR u.producer LIKE '%" . $searchKey . "%'
-//          OR u.country LIKE '%" . $searchKey . "%' OR u.price LIKE '%" . $searchKey . "%'
-//          OR u.expiration_date LIKE '%" . $searchKey . "%'");
-//        $queryProducts = $a->getQuery()->getResult();
-//        foreach ($queryProducts as $queryProduct) {
-//          if (!in_array($queryProduct, $products)) {
-//            array_push($products, $queryProduct);
-//          }
-//        }
-//      }
-      var_dump($products);
-//      $this->sendProductsToClient($products);
+      $this->sendProductsToClient($products);
     }
 
     public function action_delete()
